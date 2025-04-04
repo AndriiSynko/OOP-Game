@@ -1,17 +1,19 @@
 package gui;
 
 import entity.Player;
+import input.KeyHandler;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class GameView extends JPanel {
     private GameModel model;
-    private Player player;
+    private PlayerView playerView;
 
     public GameView(GameModel model) {
         this.model = model;
-        this.player = model.getPlayer();
+        this.playerView = new PlayerView(model.getPlayer());
+        addKeyListener(new KeyHandler(model,playerView));
         setPanelSize();
     }
 
@@ -19,12 +21,13 @@ public class GameView extends JPanel {
         setPreferredSize(new Dimension(GameModel.GAME_WIDTH, GameModel.GAME_HEIGHT));
     }
 
-    public void render(){
-        repaint();
+    public void render(Graphics g) {
+        playerView.render(g);
     }
+
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.fillRect(player.getX(), player.getY(), player.getWidth(), player.getHeight());
+        render(g);
     }
 }

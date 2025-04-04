@@ -42,7 +42,7 @@ public class GameLoop implements Runnable {
             }
 
             if (deltaF >= 1) {
-                view.render();
+                view.repaint();
                 deltaF--;
             }
         }
@@ -52,5 +52,4 @@ public class GameLoop implements Runnable {
     public void stop() {
         running = false;
     }
-
 }

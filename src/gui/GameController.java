@@ -1,6 +1,7 @@
 package gui;
 
 import gameloop.GameLoop;
+import input.KeyHandler;
 
 public class GameController{
     private GameModel model;
@@ -11,10 +12,12 @@ public class GameController{
     private GameLoop gameLoop;
     private Thread gameThread;
 
+
     public GameController() {
         model = new GameModel();
         view = new GameView(model);
         window = new GameWindow(view);
+        view.requestFocus();
         startGameLoop();
     }
 

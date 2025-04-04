@@ -6,6 +6,8 @@ import item.weapon.Weapon;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.Constants.PlayerConstants.*;
+
 public class Player extends Character{
     private int xp;
     private List<Weapon> weapons = new ArrayList<>();
@@ -23,6 +25,19 @@ public class Player extends Character{
 
     }
     public void update(){
-        x += 1;
+        updatePosition();
+    }
+
+    private void updatePosition() {
+            if (up) y -= speed;
+            if (down) y += speed;
+            if (right) x += speed;
+            if (left) x -= speed;
+    }
+
+    public int getState() {
+        if (up) return JUMPING;
+        if (left || right) return RUNNING;
+        return IDLE;
     }
 }

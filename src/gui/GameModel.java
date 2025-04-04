@@ -4,7 +4,6 @@ import entity.Player;
 
 public class GameModel {
 
-    private GameView gameView;
 
     //CONFIGURATION
     public final static int TILES_DEFAULT_SIZE = 32;
@@ -15,6 +14,7 @@ public class GameModel {
     public final static int GAME_WIDTH = TILE_SIZE*TILES_IN_WIDTH;
     public final static int GAME_HEIGHT = TILE_SIZE*TILES_IN_HEIGHT;
 
+    private GameView gameView;
     private Player player;
 
     public GameModel() {
@@ -25,8 +25,9 @@ public class GameModel {
         player = new Player();
         player.setX(GAME_WIDTH/2);
         player.setY(GAME_HEIGHT/2);
-        player.setWidth(TILE_SIZE);
-        player.setHeight(TILE_SIZE);
+        player.setWidth(TILE_SIZE*2);
+        player.setHeight(TILE_SIZE*2);
+        player.setSpeed(5);
     }
 
     public void update() {
