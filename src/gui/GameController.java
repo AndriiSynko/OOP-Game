@@ -7,7 +7,6 @@ public class GameController{
     private GameView view;
     private GameWindow window;
 
-
     public GameController() {
         model = new GameModel();
         view = new GameView(model);

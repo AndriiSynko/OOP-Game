@@ -17,4 +17,19 @@ public class GameModel {
 
     private Player player;
 
+    public GameModel() {
+        initPlayer();
+    }
+
+    private void initPlayer(){
+        player = new Player();
+        player.setX(GAME_WIDTH/2);
+        player.setY(GAME_HEIGHT/2);
+        player.setWidth(TILE_SIZE);
+        player.setHeight(TILE_SIZE);
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
 }
