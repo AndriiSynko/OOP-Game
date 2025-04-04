@@ -1,6 +1,7 @@
 package gui;
 
 import entity.Player;
+import map.Location;
 
 public class GameModel {
 
@@ -14,11 +15,12 @@ public class GameModel {
     public final static int GAME_WIDTH = TILE_SIZE*TILES_IN_WIDTH;
     public final static int GAME_HEIGHT = TILE_SIZE*TILES_IN_HEIGHT;
 
-    private GameView gameView;
     private Player player;
+    private Location location;
 
     public GameModel() {
         initPlayer();
+        initLocation();
     }
 
     private void initPlayer(){
@@ -30,11 +32,19 @@ public class GameModel {
         player.setSpeed(5);
     }
 
+    private void initLocation(){
+        location = new Location();
+    }
+
     public void update() {
         player.update();
+        location.update();
     }
 
     public Player getPlayer() {
         return player;
+    }
+    public Location getLocation() {
+        return location;
     }
 }

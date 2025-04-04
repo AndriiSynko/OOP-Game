@@ -3,8 +3,6 @@ package input;
 import gui.GameModel;
 import gui.PlayerView;
 
-import static util.Constants.PlayerConstants.*;
-import static util.Constants.Directions.*;
 
 
 import java.awt.event.KeyEvent;
@@ -12,11 +10,10 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
     private GameModel model;
-    private PlayerView playerView;
 
-    public KeyHandler(GameModel model, PlayerView playerView) {
+
+    public KeyHandler(GameModel model) {
         this.model = model;
-        this.playerView = playerView;
     }
 
     @Override

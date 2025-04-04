@@ -18,7 +18,7 @@ public class PlayerView {
     }
 
     private void loadAnimation() {
-        BufferedImage img = LoadData.getEntityImage(LoadData.PLAYER);
+        BufferedImage img = LoadData.getImage(LoadData.PLAYER);
         rightAnim = new BufferedImage[10][4];
         leftAnim = new BufferedImage[10][4];
         for (int i = 0; i < rightAnim.length; i++) {
@@ -35,9 +35,7 @@ public class PlayerView {
             aniTick = 0;
             aniIndex++;
             if (aniIndex >= 4) {
-                {
-                    aniIndex = 0;
-                }
+                aniIndex = 0;
             }
         }
     }

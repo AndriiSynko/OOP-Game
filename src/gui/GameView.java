@@ -1,6 +1,5 @@
 package gui;
 
-import entity.Player;
 import input.KeyHandler;
 
 import javax.swing.*;
@@ -9,11 +8,13 @@ import java.awt.*;
 public class GameView extends JPanel {
     private GameModel model;
     private PlayerView playerView;
+    private LocationView locationView;
 
     public GameView(GameModel model) {
         this.model = model;
         this.playerView = new PlayerView(model.getPlayer());
-        addKeyListener(new KeyHandler(model,playerView));
+        this.locationView = new LocationView(model.getLocation());
+        addKeyListener(new KeyHandler(model));
         setPanelSize();
     }
 
@@ -22,6 +23,7 @@ public class GameView extends JPanel {
     }
 
     public void render(Graphics g) {
+        locationView.render(g);
         playerView.render(g);
     }
 
