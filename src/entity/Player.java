@@ -22,6 +22,7 @@ public class Player extends Character{
     public void getKilled() {
 
     }
-
-
+    public void update(){
+        x += 1;
+    }
 }

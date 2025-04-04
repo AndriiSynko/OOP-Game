@@ -29,6 +29,10 @@ public class GameModel {
         player.setHeight(TILE_SIZE);
     }
 
+    public void update() {
+        player.update();
+    }
+
     public Player getPlayer() {
         return player;
     }
