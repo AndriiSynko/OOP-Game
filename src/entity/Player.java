@@ -18,6 +18,9 @@ public class Player extends Character{
     public Player(int x, int y, int width, int height) {
         super(x,y,width,height);
         super.speed = 5;
+        super.jumpSpeed = -11;
+        super.velocityY = 0;
+        super.onGround = false;
     }
 
     @Override
@@ -37,27 +40,50 @@ public class Player extends Character{
     }
 
     private void updatePosition(Location location) {
+        int dx = 0;
 
-        if (!left && !right &&!inAir) { return; }
+        if (left) dx -= speed;
+        if (right) dx += speed;
 
-        int xSpeed = 0, ySpeed = 0; // delta that determines where player want to move
-        if (left) xSpeed -= speed;
-        if (right) xSpeed += speed;
+        if (!onGround) {
+            velocityY += GRAVITY;
+            if (velocityY > MAX_FALL_SPEED) velocityY = MAX_FALL_SPEED;
+        }
 
-        if (up) ySpeed -= speed;
-        if (down) ySpeed += speed;
+        int dy = (int) velocityY;
 
-        int newX = x + xSpeed;
-        int newY = y + ySpeed;
+        Rectangle futureXHitbox = new Rectangle(x + dx, y, hitBox.width, hitBox.height); // horizontal movement
+        if (!CollisionChecker.isCollidingWithTiles(futureXHitbox, location)) {
+            x += dx;
+        } else {
+            dx = 0; // hit wall, cancel horizontal movement
+        }
 
-        Rectangle futureHitBox = new Rectangle(newX, newY, hitBox.width, hitBox.height);
+        Rectangle futureYHitbox = new Rectangle(x, y + dy, hitBox.width, hitBox.height); //vertical movement
+        if (!CollisionChecker.isCollidingWithTiles(futureYHitbox, location)) { // if player does not collide with something above
+            y += dy;
+            onGround = false;
+        } else { // stop before the collision tile (ground or ceiling)
+            // trying to move 1p/time in the direction until hitting into something.
+            int direction = (int) Math.signum(velocityY); // direction (positive : 1 : move up), (negative : -1 : move down)
+            while (!CollisionChecker.isCollidingWithTiles(new Rectangle(x, y + direction, hitBox.width, hitBox.height), location)) {
+                y += direction;
+            }
+            velocityY = 0; // hit something, stop moving
 
-        if (!CollisionChecker.isCollidingWithTiles(futureHitBox, location)) {
-            x = newX;
-            y = newY;
+            if (dy > 0) {
+                onGround = true; // if falling
+            }
         }
     }
 
+    public void jump() {
+        System.out.println(onGround);
+        if (onGround) {
+            velocityY = jumpSpeed;
+            onGround = false;
+        }
+    }
     public int getState() {
         if (up) return JUMPING;
         if (left || right) return RUNNING;

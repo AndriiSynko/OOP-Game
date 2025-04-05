@@ -6,12 +6,12 @@ public abstract class Character implements Killable {
     protected int x, y;
     protected Rectangle hitBox;
     protected int width, height;
-    protected int speed, airSpeed;
-    protected int gravity;
-    protected int jumpSpeed;
-    protected int fallSpeedAfterCollision;
-    protected boolean inAir = false;
-    protected boolean right,left,up,down,moving, jumping;
+    protected int speed;
+    protected double velocityY;
+    protected final double GRAVITY = 0.5;
+    protected final double MAX_FALL_SPEED = 10;
+    protected double jumpSpeed;
+    protected boolean right,left,up,down,moving, onGround;
     protected String name;
     protected int hp;
     protected int damage;
@@ -21,12 +21,6 @@ public abstract class Character implements Killable {
         this.y = y;
         this.width = width;
         this.height = height;
-
-        this.airSpeed = 0;
-        this.gravity = 1;
-        this.jumpSpeed = -3;
-        this.fallSpeedAfterCollision = 2;
-        this.inAir = false;
         initHitBox();
     }
 
