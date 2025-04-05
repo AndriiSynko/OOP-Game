@@ -1,6 +1,8 @@
 package input;
 
+import gui.CollisionChecker;
 import gui.GameModel;
+import gui.PlayerView;
 
 
 
@@ -9,58 +11,43 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
     private GameModel model;
-    private boolean leftPressed, rightPressed, spacePressed;
 
     public KeyHandler(GameModel model) {
         this.model = model;
-        this.leftPressed = false;
-        this.rightPressed = false;
-        this.spacePressed = false;
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_A:
-                leftPressed = true;
+                model.getPlayer().setLeft(true);
                 break;
             case KeyEvent.VK_D:
-                rightPressed = true;
+                model.getPlayer().setRight(true);
                 break;
             case KeyEvent.VK_SPACE:
-                spacePressed = true;
-                model.getPlayer().jump();
+                model.getPlayer().jump(true);
                 break;
         }
-        updateMovement();
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_A:
-                leftPressed = false;
+                model.getPlayer().setLeft(false);
                 break;
             case KeyEvent.VK_D:
-                rightPressed = false;
+                model.getPlayer().setRight(false);
                 break;
             case KeyEvent.VK_SPACE:
-                spacePressed = false;
+                model.getPlayer().jump(false);
                 break;
         }
-        updateMovement();
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
 
-    }
-
-    private void updateMovement() {
-        model.getPlayer().setLeft(leftPressed);
-        model.getPlayer().setRight(rightPressed);
-        if (spacePressed){
-            model.getPlayer().jump();
-        }
     }
 }

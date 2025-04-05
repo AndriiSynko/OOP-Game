@@ -35,7 +35,7 @@ public class LocationView {
     private void setSolidTiles() {
         int[] index = {0,1,2,3,4,5,6,7,8,9,
                 16,17,18,19,20,21,22,23,24,25,
-                36,37,38,39,40,41,42,43,44,
+                36,37,38,39,40,41,42,43,44,50,
                 148,164,180,196,212,226};
         for (int i : index) {
             tiles[i].setCollision(true);

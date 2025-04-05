@@ -4,15 +4,16 @@ import map.Location;
 import map.Tile;
 
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 
 public class CollisionChecker {
-    public static boolean isCollidingWithTiles(Rectangle hitBox, Location location) {
+    public static boolean isCollidingWithTiles(Rectangle2D.Float hitBox, Location location) {
         //TOP LEFT CORNER
-        int startX = hitBox.x / gui.GameModel.TILE_SIZE; // left side
-        int startY = hitBox.y / gui.GameModel.TILE_SIZE; // top side
+        int startX = (int) (hitBox.x / GameModel.TILE_SIZE); // left side
+        int startY = (int) (hitBox.y / GameModel.TILE_SIZE); // top side
         //RIGHT BOTTOM CORNER
-        int endX = (hitBox.x + hitBox.width) / gui.GameModel.TILE_SIZE; // right side
-        int endY = (hitBox.y + hitBox.height) / gui.GameModel.TILE_SIZE; // bottom side
+        int endX = (int)(hitBox.x + hitBox.width-1) / GameModel.TILE_SIZE; // right side
+        int endY = (int)(hitBox.y + hitBox.height-1) / GameModel.TILE_SIZE; // bottom side
 
         //check whether hit box intersects with solid tile by checking position of hit box and tile
         for (int y = startY; y <= endY; y++) {

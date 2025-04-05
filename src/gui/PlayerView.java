@@ -4,6 +4,7 @@ import entity.Player;
 import util.LoadData;
 
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 
@@ -11,11 +12,9 @@ public class PlayerView {
     private BufferedImage[][] rightAnim, leftAnim;
     private int aniTick=0, aniSpeed=10, aniIndex=0;
     private Player player;
-    private Rectangle hitBox;
 
     public PlayerView(Player player) {
         this.player = player;
-        this.hitBox = player.getHitBox();
         loadAnimation();
     }
 
@@ -46,9 +45,9 @@ public class PlayerView {
         updateAnimationTick();
 
         if (player.isLeft()) {
-            g.drawImage(leftAnim[player.getState()][aniIndex], player.getX(),player.getY() ,player.getWidth(), player.getHeight(), null);
+            g.drawImage(leftAnim[player.getState()][aniIndex], (int)player.getX(),(int)player.getY() ,(int)player.getWidth(), (int)player.getHeight(), null);
         }else {
-            g.drawImage(rightAnim[player.getState()][aniIndex], player.getX(),player.getY() ,player.getWidth(), player.getHeight(), null);
+            g.drawImage(rightAnim[player.getState()][aniIndex], (int)player.getX(),(int)player.getY() ,(int)player.getWidth(), (int)player.getHeight(), null);
         }
 
         //FOR DEBUG
@@ -56,9 +55,9 @@ public class PlayerView {
     }
 
     private void drawHitbox(Graphics g) {
-        Rectangle hb = player.getHitBox();
+        Rectangle2D.Float hb = player.getHitBox();
         g.setColor(Color.RED);
-        g.drawRect(hb.x, hb.y, hb.width, hb.height);
+        g.drawRect((int)hb.x, (int)hb.y, (int)hb.width, (int)hb.height);
     }
 
 }

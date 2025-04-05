@@ -24,7 +24,7 @@ public class GameModel {
     }
 
     private void initPlayer(){
-        player = new Player(GAME_WIDTH/2,GAME_HEIGHT/2,TILE_SIZE*2,TILE_SIZE*2);
+        player = new Player(96,96,TILE_SIZE*2.0f,TILE_SIZE*2.0f);
     }
 
     private void initLocation(){

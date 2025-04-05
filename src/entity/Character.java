@@ -1,22 +1,23 @@
 package entity;
 
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 
 public abstract class Character implements Killable {
-    protected int x, y;
-    protected Rectangle hitBox;
-    protected int width, height;
+    protected float x, y;
+    protected Rectangle2D.Float hitBox;
+    protected float width, height;
     protected int speed;
     protected double velocityY;
     protected final double GRAVITY = 0.5;
     protected final double MAX_FALL_SPEED = 10;
     protected double jumpSpeed;
-    protected boolean right,left,up,down,moving, onGround;
+    protected boolean right,left,up,down,moving, onGround, jumping;
     protected String name;
     protected int hp;
     protected int damage;
 
-    public Character(int x, int y, int width, int height) {
+    public Character(float x, float y, float width, float height) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -25,7 +26,7 @@ public abstract class Character implements Killable {
     }
 
     protected void initHitBox() {
-        hitBox = new Rectangle(x,y,width,height);
+        hitBox = new Rectangle2D.Float(x, y, width, height);
     }
 
     protected void updateHitBox(){
@@ -37,36 +38,40 @@ public abstract class Character implements Killable {
     void attack(Character character){};
     abstract void takeDamage(int damage);
 
-    public int getX() {
+    public float getX() {
         return x;
     }
 
-    public int getY() {
+    public float getY() {
         return y;
     }
 
-    public int getWidth() {
+    public float getWidth() {
         return width;
     }
 
-    public int getHeight() {
+    public float getHeight() {
         return height;
     }
 
-    public void setX(int x) {
+    public void setX(float x) {
         this.x = x;
     }
 
-    public void setY(int y) {
+    public void setY(float y) {
         this.y = y;
     }
 
-    public void setWidth(int width) {
+    public void setWidth(float width) {
         this.width = width;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(float height) {
         this.height = height;
+    }
+
+    public Rectangle2D.Float getHitBox() {
+        return hitBox;
     }
 
     public boolean isMoving() {
@@ -113,7 +118,7 @@ public abstract class Character implements Killable {
         return speed;
     }
 
-    public Rectangle getHitBox() {
-        return hitBox;
+    public void setJumping(boolean jumping) {
+        this.jumping = jumping;
     }
 }
