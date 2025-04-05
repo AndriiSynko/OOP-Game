@@ -1,5 +1,6 @@
 package input;
 
+import gui.CollisionChecker;
 import gui.GameModel;
 import gui.PlayerView;
 
@@ -10,7 +11,6 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
     private GameModel model;
-
 
     public KeyHandler(GameModel model) {
         this.model = model;

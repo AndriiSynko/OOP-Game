@@ -19,17 +19,12 @@ public class GameModel {
     private Location location;
 
     public GameModel() {
-        initPlayer();
         initLocation();
+        initPlayer();
     }
 
     private void initPlayer(){
-        player = new Player();
-        player.setX(GAME_WIDTH/2);
-        player.setY(GAME_HEIGHT/2);
-        player.setWidth(TILE_SIZE*2);
-        player.setHeight(TILE_SIZE*2);
-        player.setSpeed(5);
+        player = new Player(GAME_WIDTH/2,GAME_HEIGHT/2,TILE_SIZE*2,TILE_SIZE*2);
     }
 
     private void initLocation(){
@@ -37,7 +32,7 @@ public class GameModel {
     }
 
     public void update() {
-        player.update();
+        player.update(location);
         location.update();
     }
 

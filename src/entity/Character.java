@@ -1,14 +1,44 @@
 package entity;
 
+import java.awt.*;
+
 public abstract class Character implements Killable {
     protected int x, y;
+    protected Rectangle hitBox;
     protected int width, height;
-    protected int speed;
-    protected int hitBox;
-    protected boolean right,left,up,down,moving;
+    protected int speed, airSpeed;
+    protected int gravity;
+    protected int jumpSpeed;
+    protected int fallSpeedAfterCollision;
+    protected boolean inAir = false;
+    protected boolean right,left,up,down,moving, jumping;
     protected String name;
     protected int hp;
     protected int damage;
+
+    public Character(int x, int y, int width, int height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+
+        this.airSpeed = 0;
+        this.gravity = 1;
+        this.jumpSpeed = -3;
+        this.fallSpeedAfterCollision = 2;
+        this.inAir = false;
+        initHitBox();
+    }
+
+    protected void initHitBox() {
+        hitBox = new Rectangle(x,y,width,height);
+    }
+
+    protected void updateHitBox(){
+        hitBox.x = x;
+        hitBox.y = y;
+    }
+
 
     void attack(Character character){};
     abstract void takeDamage(int damage);
@@ -89,7 +119,7 @@ public abstract class Character implements Killable {
         return speed;
     }
 
-    public void setSpeed(int speed) {
-        this.speed = speed;
+    public Rectangle getHitBox() {
+        return hitBox;
     }
 }

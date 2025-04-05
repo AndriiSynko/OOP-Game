@@ -10,6 +10,7 @@ import java.util.List;
 public class Location {
     private ParkourPhase parkouLevelOne;
     private BattlePhase battle;
+    private Tile[] tiles;
 
     public Location() {
         parkouLevelOne = new ParkourPhase(LoadData.getLevelData(LoadData.LEVEL_1_MAP));
@@ -21,11 +22,22 @@ public class Location {
     void enter(){};
     void complete(){};
 
-    public void update() {
+    public void update() {}
 
+    public ParkourPhase getParkorLevelOne() {
+        return parkouLevelOne;
     }
 
-    public ParkourPhase getParkouLevelOne() {
-        return parkouLevelOne;
+    public Tile[] getTiles() {
+        return tiles;
+    }
+
+    public void setTiles(Tile[] tiles) {
+        this.tiles = tiles;
+    }
+
+    public Tile getTile(int index) {
+        if (index >= 0 && index < tiles.length) return tiles[index];
+        return null;
     }
 }

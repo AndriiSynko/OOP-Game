@@ -14,6 +14,8 @@ public class GameView extends JPanel {
         this.model = model;
         this.playerView = new PlayerView(model.getPlayer());
         this.locationView = new LocationView(model.getLocation());
+        setFocusable(true);
+        requestFocusInWindow();
         addKeyListener(new KeyHandler(model));
         setPanelSize();
     }

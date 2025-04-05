@@ -11,9 +11,11 @@ public class PlayerView {
     private BufferedImage[][] rightAnim, leftAnim;
     private int aniTick=0, aniSpeed=10, aniIndex=0;
     private Player player;
+    private Rectangle hitBox;
 
     public PlayerView(Player player) {
         this.player = player;
+        this.hitBox = player.getHitBox();
         loadAnimation();
     }
 
@@ -48,5 +50,15 @@ public class PlayerView {
         }else {
             g.drawImage(rightAnim[player.getState()][aniIndex], player.getX(),player.getY() ,player.getWidth(), player.getHeight(), null);
         }
+
+        //FOR DEBUG
+        drawHitbox(g);
     }
+
+    private void drawHitbox(Graphics g) {
+        Rectangle hb = player.getHitBox();
+        g.setColor(Color.RED);
+        g.drawRect(hb.x, hb.y, hb.width, hb.height);
+    }
+
 }

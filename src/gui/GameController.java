@@ -7,6 +7,7 @@ public class GameController{
     private GameModel model;
     private GameView view;
     private GameWindow window;
+    private CollisionChecker collisionChecker;
 
 
     private GameLoop gameLoop;
@@ -17,7 +18,7 @@ public class GameController{
         model = new GameModel();
         view = new GameView(model);
         window = new GameWindow(view);
-        view.requestFocus();
+//        view.requestFocus();
         startGameLoop();
     }
 
